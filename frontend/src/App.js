@@ -1,13 +1,11 @@
-import React from 'react'
-import Items from './components/items/items'
-import './App.css'
+import './App.css';
 
 function App() {
-    return (
-        <div>
-            <Items/>
-        </div>
-    )
+  return (
+    <div className="App">
+      
+    </div>
+  );
 }
 
 export default App;
