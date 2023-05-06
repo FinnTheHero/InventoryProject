@@ -10,7 +10,7 @@ class Navbar extends Component {
             <div>
                  <Nav variant='tabs' defaultActiveKey="/home" as="ul">
                     <Nav.Item as="li">
-                        <Nav.Link href="/">Invenotiries</Nav.Link>
+                        <Nav.Link href="/">Inventory</Nav.Link>
                     </Nav.Item>
                     <Nav.Item as="li">
                         <Nav.Link href="/add">Add</Nav.Link>
