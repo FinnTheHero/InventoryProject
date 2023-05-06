@@ -27,7 +27,7 @@ class Items extends Component {
             <div style={{
                 display:'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'space-evenly'
     }}>
                 <ul>
                     {this.state.items.map((item) => {
@@ -37,7 +37,7 @@ class Items extends Component {
                                     flexDirection: 'row',
                                     flexWrap: 'nowrap',
                                     alignItems: 'center',
-                                    justifyContent: 'space-between'
+                                    justifyContent: 'center'
                                 }}>
                                     <ListGroup.Item>{item.name}</ListGroup.Item>
                                     <ListGroup.Item>{item.location}</ListGroup.Item>

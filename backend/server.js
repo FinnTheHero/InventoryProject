@@ -8,10 +8,14 @@ const app = express()
 // Middleware
 app.use(morgan('dev'))
 
+// JSON handling
+app.use(express.json())
+app.use(express.urlencoded({extended:false}))
+
 // Listen To Port 4000
 app.listen(4000, () => console.log('Listening To Port 4000'))
 
-// Set up Test Api
+// GET Request
 app.get('/inventories', (req,res) => {
     Item.findAll()
         .then(items => {
@@ -19,4 +23,15 @@ app.get('/inventories', (req,res) => {
             console.log('Json sent successfully')
         })
         .catch(err => console.log('Unable To Fetch Items From DataBase:', err))
+})
+
+// Post Request
+app.post('/add', (req,res) => {
+    const data = Item.build({
+        name: req.body.name,
+        location: req.body.location,
+        price: req.body.price
+    })
+
+    data.save()
 })

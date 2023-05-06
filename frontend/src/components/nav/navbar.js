@@ -13,7 +13,7 @@ class Navbar extends Component {
                         <Nav.Link href="/">Invenotiries</Nav.Link>
                     </Nav.Item>
                     <Nav.Item as="li">
-                        <Nav.Link href="/addsss">Add</Nav.Link>
+                        <Nav.Link href="/add">Add</Nav.Link>
                     </Nav.Item>
                 </Nav>
             </div>
