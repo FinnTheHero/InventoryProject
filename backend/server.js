@@ -12,7 +12,7 @@ app.use(morgan('dev'))
 app.listen(4000, () => console.log('Listening To Port 4000'))
 
 // Set up Test Api
-app.get('/', (req,res) => {
+app.get('/inventories', (req,res) => {
     Item.findAll()
         .then(items => {
             res.json(items)

@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes } = require('sequelize')
+const { Sequelize } = require('sequelize')
 
 // Setup DataBase
 const sequelize = new Sequelize('TestDB','postgres','noza1234',{
@@ -9,7 +9,11 @@ const sequelize = new Sequelize('TestDB','postgres','noza1234',{
 
 // Authenticate DataBase Connection
 sequelize.authenticate()
-    .then(() => console.log('Connection Has Established Successfully'))
-    .catch(err => console.log('Unable To Connect To The DataBase:', err))
+    .then(() => {
+        console.log('Connection Has Established Successfully')
+    })
+    .catch(err => {
+        console.log('Unable To Connect To The DataBase:', err)
+    })
 
-module.export = sequelize
+module.exports = sequelize
