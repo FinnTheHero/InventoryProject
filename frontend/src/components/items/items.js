@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './items.css'
 
+// Create Item Component
 class Items extends Component {
     constructor() {
         super()
@@ -9,6 +9,7 @@ class Items extends Component {
         }
     }
 
+    // Fetch The Data
     componentDidMount() {
         fetch('/inventories')
             .then(response => response.json())
@@ -17,6 +18,7 @@ class Items extends Component {
             })
     }
 
+    // Render Data
     render() {
         return(
             <div>
