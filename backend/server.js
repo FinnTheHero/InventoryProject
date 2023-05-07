@@ -1,6 +1,11 @@
 const express = require('express')
 const morgan = require('morgan')
 const Item = require('./models/itemModel')
+const itemGenerator = require('./createItems')
+
+
+// Generate Random Item Data In DataBase
+itemGenerator()
 
 // Creating Express App
 const app = express()
@@ -16,13 +21,31 @@ app.use(express.urlencoded({extended:false}))
 app.listen(4000, () => console.log('Listening To Port 4000'))
 
 // GET Request
-app.get('/inventories', (req,res) => {
-    Item.findAll()
-        .then(items => {
-            res.json(items)
-            console.log('Json sent successfully')
-        })
-        .catch(err => console.log('Unable To Fetch Items From DataBase:', err))
+app.get('/inventories', async (req,res) => {
+
+    const pageAsNumber = Number.parseInt(req.query.page)
+    const sizeAsNumber = Number.parseInt(req.query.size)
+
+    let page = 0
+    if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
+        page = pageAsNumber
+    }
+
+    let size = 20
+    if(!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 20){
+        size = sizeAsNumber
+    }
+
+
+    const response = await Item.findAndCountAll({
+        limit: size,
+        offset: page * size
+    })
+
+    res.send({
+        content: response.rows,
+        totalPages: Math.ceil(response.count / size)
+    })
 })
 
 // Post Request
