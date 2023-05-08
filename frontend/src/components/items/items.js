@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { usePagination } from '../pagination/usePagination'
+import Pagination from 'react-bootstrap/Pagination'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
-import axios from 'axios'
+import fetchItems from './apiCall'
 
-// Create Item Component
 export default function Items() {
-    const [info, setInfo] = useState([])
-    
-    useEffect(() => {
-        axios.get('/inventories')
-            .then((response) => {
-                setInfo(response.data.content)
-            })
-            .catch(err => console.log(err))
-    },[])
+    const {itemArray, currentPage, totalPages, setCurrentPage} = usePagination(fetchItems)
+    console.log(itemArray)
 
-    const renderData = info.map((data) => {
+    const renderData = itemArray.map((data) => {
         return(
             <tr key={data.id}>
                 <td>{data.id}</td>
@@ -27,9 +21,10 @@ export default function Items() {
         )
     })
 
+    
     // Render Data    
     return(
-        <div>         
+        <div className='d-flex align-items-center justify-content-center flex-column'>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -44,6 +39,16 @@ export default function Items() {
                     {renderData}
                 </tbody>
             </Table>
+
+            <Pagination>
+                <Pagination.First onClick={() => {setCurrentPage(0)}}/>
+                
+                {(currentPage > 1)?<Pagination.Item onClick={() => {setCurrentPage(currentPage - 1)}}>{currentPage - 1}</Pagination.Item>:""}
+                <Pagination.Item active>{currentPage}</Pagination.Item>
+                {(currentPage < (totalPages - 1))?<Pagination.Item onClick={() => {setCurrentPage(currentPage + 1)}}>{currentPage + 1}</Pagination.Item>:""}
+
+                <Pagination.Last onClick={() => {setCurrentPage(totalPages - 1)}}/>
+            </Pagination>
         </div>
     )
 }

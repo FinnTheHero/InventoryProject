@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const Item = require('./models/itemModel')
 const itemGenerator = require('./createItems')
+const cors = require('cors')
 
 
 // Generate Random Item Data In DataBase
@@ -12,6 +13,7 @@ const app = express()
 
 // Middleware
 app.use(morgan('dev'))
+app.use(cors({origin:'http://localhost:3000'}))
 
 // JSON handling
 app.use(express.json())

@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom'
 import './add.css'
 
 export default function Add() {
-
     const navigate = useNavigate();
-    
+
+    // Send Post request
     function sendData(item) {
         axios.post('/add', item).catch(err => console.log(err))
         navigate('/')
     }
-    
+
     const {
         register,
         handleSubmit,
@@ -31,19 +31,6 @@ export default function Add() {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-
-                {/* <Dropdown >
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Dropdown Button
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu  {...register('location',{ required: 'Location is required !' })} >
-                        <Dropdown.Item value='Main Office' >Action</Dropdown.Item>
-                        <Dropdown.Item value='Cavea City Mall' >Another action</Dropdown.Item>
-                        <Dropdown.Item value='Cavea Tbilisi Mall' >Something else</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown> */}
-
                 <label>Choose Location:</label>
                 <select  variant="success" id="dropdown-basic" {...register('location',{ required: 'Location is required !' })}>
                     <option></option>
