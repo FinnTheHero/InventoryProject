@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function usePagination(apiCall) {
+export function usePagination(apiCall, refresh, setRefresh) {
     const [currentPage, setCurrentPage] = useState(0)
     const [totalPages, setTotalPages] = useState(1)
     const [itemArray, setItemArray] = useState([])
@@ -14,8 +14,11 @@ export function usePagination(apiCall) {
                 setTotalPages(response.data.totalPages)
             })
             .catch(err => console.log(err))
-            .finally(() => setLoading(false))     
-    }, [currentPage])
+            .finally(() => {
+                setLoading(false)
+                setRefresh(false)
+            })     
+    }, [currentPage,refresh])
 
   return {itemArray, currentPage, totalPages, loading, setCurrentPage}
 }

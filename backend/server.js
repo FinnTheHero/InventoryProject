@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended:false}))
 app.listen(4000, () => console.log('Listening To Port 4000'))
 
 // GET Request
-app.get('/inventories', async (req,res) => {
+app.get('/inventory', async (req,res) => {
 
     const pageAsNumber = Number.parseInt(req.query.page)
     const sizeAsNumber = Number.parseInt(req.query.size)
@@ -59,4 +59,13 @@ app.post('/add', (req,res) => {
     })
 
     data.save()
+})
+
+// Delete Request
+app.delete('/inventory/:id', (req,res) => {
+    Item.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
 })
