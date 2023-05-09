@@ -18,7 +18,7 @@ This app provides an easy-to-use interface with basic features to add, delete, a
 
 ## Installation
 
-Assuming you already have PostgreSQL setup on your local machine and running
+Assuming you already have PostgreSQL setup and running on your local machine
 
 1. Clone the repository to your local machine:
    	git clone https://github.com/FinnTheHero/InventoryProject.git
@@ -28,15 +28,23 @@ Assuming you already have PostgreSQL setup on your local machine and running
 	cd backend
 4. Install the required dependencies:
 	npm install
-5. Start backend:
+5. Create .env file
+	cat > .env
+6. Add user information in .env file (database name, user name, user password)
+	PGDATABASE='your_database_name'
+	PGUSER='your_user_name'
+	PGPASSWORD='your_user_password'
+
+	then hit ctrl+c
+7. Start backend:
 	npm start
-6. Exit backend(or use another Terminal/command promt):
+8. Exit backend(or use another Terminal/command promt):
 	cd ..
-7. Navigate to frontend(font and backend are 2 separate folders placed side by side):
+9. Navigate to frontend(font and backend are 2 separate folders placed side by side):
 	cd frontend
-8. Install the required dependencies:
+10. Install the required dependencies:
 	npm install
-9. Start frontend:
+11. Start frontend:
 	npm start
 
 The app should now be running at [http://localhost:4000](http://localhost:3000).
