@@ -1,7 +1,7 @@
 const Item = require('./models/itemModel')
 const sequelize = require('./database')
 
-const itemGenerator = () => sequelize.sync({ force: true }).then(async () => {
+const itemGenerator = (n) => sequelize.sync({ force: true }).then(async () => {
     const locations = [
         'Main Office',
         'Cavea Tbilisi Mall',
@@ -10,7 +10,7 @@ const itemGenerator = () => sequelize.sync({ force: true }).then(async () => {
         'Cavea City Mall'
     ]
 
-    for(let i = 1; i < 300; i++){
+    for(let i = 1; i < n; i++){
         let randomIndex = Math.floor(Math.random() * locations.length)
         let randomPrice = Math.floor(Math.random() * 100)
         const item = {

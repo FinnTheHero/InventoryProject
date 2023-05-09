@@ -1,7 +1,7 @@
 import React from 'react'
-import Items from './components/items/items'
-import Navbar from './components/nav/navbar'
-import Add from './components/add/add'
+import Items from './components/items/Items'
+import Navbar from './components/nav/Navbar'
+import Add from './components/add/Add'
 import { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'

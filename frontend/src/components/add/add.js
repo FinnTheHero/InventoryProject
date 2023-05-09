@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import './add.css'
 
 export default function Add() {
     const navigate = useNavigate();
@@ -47,7 +46,7 @@ export default function Add() {
                 <p>{errors.name?.message}</p>
 
                 <label>Price :</label>
-                <input {...register('price',{ required: 'Price is required !' })}></input>
+                <input type='number' {...register('price',{ required: 'Price is required !' })}></input>
                 <p>{errors.price?.message}</p>
                 
                 <input type='submit'></input>

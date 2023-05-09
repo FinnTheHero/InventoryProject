@@ -1,7 +1,7 @@
 const { Sequelize } = require('sequelize')
-
+require('dotenv').config()
 // Setup DataBase
-const sequelize = new Sequelize('TestDB','postgres','noza1234',{
+const sequelize = new Sequelize(process.env.PGDATABASE,process.env.PGUSER,process.env.PGPASSWORD,{
     host: 'localhost',
     dialect: 'postgres',
     port: '5000'

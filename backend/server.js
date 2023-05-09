@@ -6,7 +6,7 @@ const cors = require('cors')
 
 
 // Generate Random Item Data In DataBase
-itemGenerator()
+// itemGenerator()
 
 // Creating Express App
 const app = express()
@@ -26,32 +26,57 @@ app.listen(4000, () => console.log('Listening To Port 4000'))
 app.get('/inventory', async (req,res) => {
 
     const pageAsNumber = Number.parseInt(req.query.page)
-    const sizeAsNumber = Number.parseInt(req.query.size)
 
     let page = 0
     if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
         page = pageAsNumber
     }
 
-    let size = 20
-    if(!Number.isNaN(sizeAsNumber) && sizeAsNumber > 0 && sizeAsNumber < 20){
-        size = sizeAsNumber
-    }
-
-
     const response = await Item.findAndCountAll({
-        limit: size,
-        offset: page * size
+        limit: 20,
+        offset: page * 20
     })
 
     res.send({
         content: response.rows,
-        totalPages: Math.ceil(response.count / size)
+        totalPages: Math.ceil(response.count / 20)
+    })
+})
+
+app.get('/inventory/search', async (req,res) => {
+    const pageAsNumber = Number.parseInt(req.query.page)
+    
+    let page = 0
+    if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
+        page = pageAsNumber
+    }
+
+    let resultLocation = ' '
+
+    let allLocations = ['Main Office', 'Cavea Tbilisi Mall', 'Cavea East Point', 'Cavea Gallery', 'Cavea City Mall']
+    req.query.location ? (resultLocation = req.query.location.replace(/%20/g, " ")) : (resultLocation = allLocations)
+    let sort = req.query.sort || 'id'
+    let sortBy = req.query.sortby || 'ASC'
+    console.log(sortBy)
+    const response = await Item.findAndCountAll({
+        where: {
+            location: resultLocation
+        },
+        order: [
+            [sort, sortBy]
+        ],
+        limit: 20,
+        offset: page * 20
+    })
+
+    res.send({
+        content: response.rows,
+        totalPages: Math.ceil(response.count / 20)
     })
 })
 
 // Post Request
-app.post('/add', (req,res) => {
+app.post('/add', async (req,res) => {
     const data = Item.build({
         name: req.body.name,
         location: req.body.location,
