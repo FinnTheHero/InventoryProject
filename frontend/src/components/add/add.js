@@ -8,10 +8,11 @@ export default function Add() {
 
     // Send Post request
     function sendData(item) {
-        axios.post('/add', item).catch(err => console.log(err))
+        axios.post('/inventories', item).catch(err => console.log(err))
         navigate('/')
     }
 
+    // React-Hook-Form
     const {
         register,
         handleSubmit,
@@ -19,7 +20,7 @@ export default function Add() {
     } = useForm()
     
     
-    // Render Add Form 
+    // Render Form
     return(
         <div className='d-flex justify-content-center align-items-center'>
             <form onSubmit={handleSubmit((data) => {

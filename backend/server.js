@@ -6,7 +6,7 @@ const cors = require('cors')
 
 
 // Generate Random Item Data In DataBase
-// itemGenerator()
+itemGenerator(500)
 
 // Creating Express App
 const app = express()
@@ -23,27 +23,7 @@ app.use(express.urlencoded({extended:false}))
 app.listen(4000, () => console.log('Listening To Port 4000'))
 
 // GET Request
-app.get('/inventory', async (req,res) => {
-
-    const pageAsNumber = Number.parseInt(req.query.page)
-
-    let page = 0
-    if(!Number.isNaN(pageAsNumber) && pageAsNumber > 0){
-        page = pageAsNumber
-    }
-
-    const response = await Item.findAndCountAll({
-        limit: 20,
-        offset: page * 20
-    })
-
-    res.send({
-        content: response.rows,
-        totalPages: Math.ceil(response.count / 20)
-    })
-})
-
-app.get('/inventory/search', async (req,res) => {
+app.get('/inventories', async (req,res) => {
     const pageAsNumber = Number.parseInt(req.query.page)
     
     let page = 0
@@ -51,16 +31,16 @@ app.get('/inventory/search', async (req,res) => {
         page = pageAsNumber
     }
 
-    let resultLocation = ' '
+    let searchLocation = ' '
 
     let allLocations = ['Main Office', 'Cavea Tbilisi Mall', 'Cavea East Point', 'Cavea Gallery', 'Cavea City Mall']
-    req.query.location ? (resultLocation = req.query.location.replace(/%20/g, " ")) : (resultLocation = allLocations)
+    req.query.location ? (searchLocation = req.query.location.replace(/%20/g, " ")) : (searchLocation = allLocations)
     let sort = req.query.sort || 'id'
     let sortBy = req.query.sortby || 'ASC'
-    console.log(sortBy)
+
     const response = await Item.findAndCountAll({
         where: {
-            location: resultLocation
+            location: searchLocation
         },
         order: [
             [sort, sortBy]
@@ -76,19 +56,17 @@ app.get('/inventory/search', async (req,res) => {
 })
 
 // Post Request
-app.post('/add', async (req,res) => {
-    const data = Item.build({
+app.post('/inventories', async (req,res) => {
+    await Item.create({
         name: req.body.name,
         location: req.body.location,
         price: req.body.price
     })
-
-    data.save()
 })
 
 // Delete Request
-app.delete('/inventory/:id', (req,res) => {
-    Item.destroy({
+app.delete('/inventories/:id', async (req,res) => {
+    await Item.destroy({
         where: {
             id: req.params.id
         }

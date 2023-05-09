@@ -1,14 +1,14 @@
 const { Sequelize } = require('sequelize')
 require('dotenv').config()
 // Setup DataBase
-const sequelize = new Sequelize(process.env.PGDATABASE,process.env.PGUSER,process.env.PGPASSWORD,{
+const inventory = new Sequelize(process.env.PGDATABASE,process.env.PGUSER,process.env.PGPASSWORD,{
     host: 'localhost',
     dialect: 'postgres',
     port: '5000'
 })
 
 // Authenticate DataBase Connection
-sequelize.authenticate()
+inventory.authenticate()
     .then(() => {
         console.log('Connection Has Established Successfully')
     })
@@ -16,4 +16,4 @@ sequelize.authenticate()
         console.log('Unable To Connect To The DataBase:', err)
     })
 
-module.exports = sequelize
+module.exports = inventory

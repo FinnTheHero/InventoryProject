@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize')
-const sequelize = require('../database.js')
+const inventory = require('../database.js')
 
 // Setup Item Model
-const Item = sequelize.define('Item',{
+const Item = inventory.define('Item',{
     name:{
         type: DataTypes.TEXT,
         allowNull: false

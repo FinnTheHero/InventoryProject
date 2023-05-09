@@ -8,18 +8,16 @@ import { useForm } from 'react-hook-form'
 
 export default function Items() {
     const [refresh, setRefresh] = useState(false)
+    const { itemArray, currentPage, totalPages, setCurrentPage, setSort, setSortBy, setLocation} = usePagination(refresh, setRefresh)
 
     const handleDelete = (data) => {
-        axios.delete(`/inventory/${data.id}`)
+        axios.delete(`/inventories/${data.id}`)
         .catch(err => console.log(err))
 
         setRefresh(true)
     }
-    
-    const { itemArray, currentPage, totalPages, setCurrentPage, setSort, setSortBy, setLocation} = usePagination(refresh, setRefresh)
 
-    
-
+    // Generate List Data For Rendering
     const renderData = itemArray.map((data, index) => {
         return(
             <tr key={data.id}>
@@ -38,14 +36,14 @@ export default function Items() {
         )
     })
 
-    
+    // React-Hook-Form
     const {
         register,
         handleSubmit,
         formState: {errors}
     } = useForm()
     
-    // Render Data    
+    // Render List  
     return(
         <div className='d-flex flex-column'>
             <form onSubmit={handleSubmit((data) => {

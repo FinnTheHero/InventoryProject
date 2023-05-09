@@ -1,7 +1,7 @@
 const Item = require('./models/itemModel')
-const sequelize = require('./database')
+const inventory = require('./database')
 
-const itemGenerator = (n) => sequelize.sync({ force: true }).then(async () => {
+const itemGenerator = (n) => inventory.sync({ force: true }).then(async () => {
     const locations = [
         'Main Office',
         'Cavea Tbilisi Mall',

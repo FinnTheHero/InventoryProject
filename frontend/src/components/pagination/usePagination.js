@@ -9,10 +9,11 @@ export function usePagination(refresh,setRefresh) {
     const [sortBy, setSortBy] = useState("")
     const [location, setLocation] = useState("")
 
+    // Render Current Search's Data Or Use Defaults In Backend
     useEffect(() => {
         const findAll = async () => {
             try{
-                const url = `/inventory/search?page=${currentPage}&sort=${sort}&sortby=${sortBy}&location=${location}`
+                const url = `/inventories?page=${currentPage}&sort=${sort}&sortby=${sortBy}&location=${location}`
 
                 const {data} = await axios.get(url)
                 setItemArray(data.content)
