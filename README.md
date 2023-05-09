@@ -46,7 +46,7 @@ Assuming you already have PostgreSQL setup and running on your local machine
 11. Start frontend:  
 	npm start  
 
-The app should now be running at [http://localhost:4000](http://localhost:3000).  
+The app should now be running at [http://localhost:3000](http://localhost:3000).  
 
 ! If connection with database is not established you might have to check port where your database is working  
 ! Then navigate in backend/database.js and replace port number with your port   
