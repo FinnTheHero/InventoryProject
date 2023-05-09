@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export function usePagination(refresh,setRefresh) {
+export function UsePagination(refresh,setRefresh) {
     const [currentPage, setCurrentPage] = useState(0)
     const [totalPages, setTotalPages] = useState(1)
     const [itemArray, setItemArray] = useState([])

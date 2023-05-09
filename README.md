@@ -32,7 +32,9 @@ Assuming you already have PostgreSQL setup and running on your local machine
 	cat > .env
 6. Add user information in .env file (database name, user name, user password)
 	PGDATABASE='your_database_name'
+
 	PGUSER='your_user_name'
+	
 	PGPASSWORD='your_user_password'
 
 	then hit ctrl+c

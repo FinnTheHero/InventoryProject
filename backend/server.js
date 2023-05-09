@@ -3,8 +3,6 @@ const morgan = require('morgan')
 const Item = require('./models/itemModel')
 const itemGenerator = require('./createItems')
 const cors = require('cors')
-
-
 // Generate Random Item Data In DataBase
 itemGenerator(500)
 

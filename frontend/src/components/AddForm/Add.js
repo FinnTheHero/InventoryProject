@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import Button from 'react-bootstrap/button'
 
 export default function Add() {
     const navigate = useNavigate();
@@ -47,10 +48,10 @@ export default function Add() {
                 <p>{errors.name?.message}</p>
 
                 <label>Price :</label>
-                <input type='number' {...register('price',{ required: 'Price is required !' })}></input>
+                <input type='number' {...register('price',{ required: 'Price is required !', max: {value: 500, message: "Can't be more than 500" } })}></input>
                 <p>{errors.price?.message}</p>
                 
-                <input type='submit'></input>
+                <Button type='submit' variant="success">Add Item</Button>{' '}
             </form>
             
         </div>

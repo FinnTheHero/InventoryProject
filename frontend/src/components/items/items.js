@@ -1,5 +1,5 @@
 import { React, useState } from 'react'
-import { usePagination } from '../pagination/usePagination'
+import { UsePagination } from '../Pagination/UsePagination'
 import Pagination from 'react-bootstrap/Pagination'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 
 export default function Items() {
     const [refresh, setRefresh] = useState(false)
-    const { itemArray, currentPage, totalPages, setCurrentPage, setSort, setSortBy, setLocation} = usePagination(refresh, setRefresh)
+    const { itemArray, currentPage, totalPages, setCurrentPage, setSort, setSortBy, setLocation} = UsePagination(refresh, setRefresh)
 
     const handleDelete = (data) => {
         axios.delete(`/inventories/${data.id}`)
@@ -60,7 +60,6 @@ export default function Items() {
                     <option value='Cavea Gallery'>Cavea Gallery</option>
                     <option value='Cavea East Point'>Cavea East Point</option>
                 </select>
-                <label className='m-2'>{errors.location?.message}</label>
 
                 <label>Sort By : </label>
                 <select {...register('sort')} className='m-2'>
@@ -74,7 +73,7 @@ export default function Items() {
                     <option value='ASC'>Ascending</option>
                     <option value='DESC'>Descending</option>
                 </select>
-                <input type="submit"></input>
+                <Button type='submit' variant="success">Search</Button>{' '}
             </form>
 
             <Table striped bordered hover>

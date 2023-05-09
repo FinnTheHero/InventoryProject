@@ -8,7 +8,7 @@ class Navbar extends Component {
     render() {
         return(
             <div>
-                 <Nav variant='tabs' defaultActiveKey="/home" as="ul">
+                 <Nav variant='tabs' as="ul">
                     <Nav.Item as="li">
                         <Nav.Link href="/">Inventory</Nav.Link>
                     </Nav.Item>
